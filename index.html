@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wyatt Kedinger — Principal Motion Designer. VFX, brand motion, product animation, and systems at scale." />
+  <title>Wyatt K.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #161616;
+      --border: #222222;
+      --accent: #e8ff3c;
+      --text: #f0f0f0;
+      --muted: #555555;
+      --muted-2: #888888;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted-2);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--bg);
+      background: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─── HERO ─── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 80px;
+      padding-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 10vw, 140px);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 48px;
+    }
+
+    .hero-roles p {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted-2);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-roles p::before {
+      content: '> ';
+      color: var(--accent);
+    }
+
+    .hero-reel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 14px 24px;
+      transition: border-color 0.2s, background 0.2s;
+      width: fit-content;
+    }
+
+    .hero-reel-btn:hover {
+      border-color: var(--accent);
+      background: rgba(232,255,60,0.05);
+    }
+
+    .hero-reel-btn .play-icon {
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-reel-btn .play-icon::after {
+      content: '';
+      border-left: 6px solid var(--accent);
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      margin-left: 2px;
+    }
+
+    /* reel modal */
+    .reel-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reel-modal.open { display: flex; }
+
+    .reel-modal-inner {
+      position: relative;
+      width: 90vw;
+      max-width: 1100px;
+      aspect-ratio: 16/9;
+    }
+
+    .reel-modal-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .reel-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .reel-close::before {
+      content: '✕';
+      font-size: 16px;
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section {
+      padding: 120px 40px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .eyebrow::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    /* ─── MISSION ─── */
+    #mission {
+      border-top: 1px solid var(--border);
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .mission-text h2 {
+      margin-bottom: 32px;
+    }
+
+    .mission-text p {
+      color: var(--muted-2);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    .logos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    .logo-cell {
+      aspect-ratio: 2/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      border: 1px solid var(--border);
+      filter: brightness(0) invert(1);
+      opacity: 0.3;
+      transition: opacity 0.2s;
+    }
+
+    .logo-cell:hover { opacity: 0.7; }
+
+    .logo-cell img {
+      max-width: 100%;
+      max-height: 28px;
+      object-fit: contain;
+    }
+
+    /* ─── FANTASTIC FOUR ─── */
+    #services {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .services-header {
+      margin-bottom: 64px;
+    }
+
+    .services-header h2 {
+      max-width: 640px;
+      margin-top: 16px;
+    }
+
+    .services-tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .service-tab {
+      flex: 1;
+      padding: 16px 20px;
+      border: none;
+      border-right: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .service-tab:last-child { border-right: none; }
+
+    .service-tab .tab-letter {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--border);
+      transition: color 0.2s;
+      font-family: var(--font-display);
+    }
+
+    .service-tab.active,
+    .service-tab:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .service-tab.active .tab-letter,
+    .service-tab:hover .tab-letter { color: var(--accent); }
+
+    .service-panel {
+      display: none;
+      border: 1px solid var(--border);
+      border-top: none;
+    }
+
+    .service-panel.active { display: grid; grid-template-columns: 1fr 1fr; }
+
+    .service-video-wrap {
+      aspect-ratio: 16/9;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-info {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-info h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .service-info .service-desc {
+      font-size: 15px;
+      color: var(--muted-2);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .service-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+    }
+
+    /* ─── WORKS ─── */
+    #works {
+      border-top: 1px solid var(--border);
+    }
+
+    .works-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 64px;
+    }
+
+    .works-header h2 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .work-card {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      display: block;
+      text-decoration: none;
+    }
+
+    .work-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.3s;
+      filter: brightness(0.7);
+    }
+
+    .work-card:hover .work-card-img {
+      transform: scale(1.04);
+      filter: brightness(0.5);
+    }
+
+    .work-card-overlay {
+      position: absolute;
+      inset: 0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+    }
+
+    .work-client {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .work-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .work-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .work-tool {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(240,240,240,0.5);
+      border: 1px solid rgba(240,240,240,0.15);
+      padding: 3px 8px;
+    }
+
+    /* large card spans 2 */
+    .work-card.wide {
+      grid-column: span 2;
+      aspect-ratio: auto;
+      min-height: 340px;
+    }
+
+    /* ─── UI/UX MOTION ─── */
+    #uiux {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .uiux-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .uiux-left h2 {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .uiux-left p {
+      color: var(--muted-2);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .uiux-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .uiux-video-wrap {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .uiux-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .rive-wrap {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .rive-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── STATS ─── */
+    #stats {
+      border-top: 1px solid var(--border);
+    }
+
+    .stats-header {
+      margin-bottom: 80px;
+    }
+
+    .stats-header h2 {
+      max-width: 640px;
+      margin-top: 16px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .stat-card {
+      background: var(--bg);
+      padding: 48px 40px;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-number span { color: var(--accent); }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-left p {
+      color: var(--muted-2);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 420px;
+    }
+
+    .contact-links {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .contact-link:hover .contact-link-icon { border-color: var(--accent); }
+
+    .contact-right {
+      padding-top: 16px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+      resize: none;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+
+    .form-submit {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+
+    .form-submit:hover { opacity: 0.85; }
+
+    .form-status {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      display: none;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #home { padding: 100px 24px 60px; }
+      .mission-layout,
+      .uiux-layout,
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .works-grid { grid-template-columns: 1fr 1fr; }
+      .work-card.wide { grid-column: span 1; aspect-ratio: 4/3; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .service-panel.active { grid-template-columns: 1fr; }
+      .service-video-wrap { aspect-ratio: 16/9; }
+      .logos-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .services-tabs { flex-wrap: wrap; }
+      .service-tab { flex: none; width: 50%; border-bottom: 1px solid var(--border); }
+    }
+
+    @media (max-width: 560px) {
+      .works-grid { grid-template-columns: 1fr; }
+      h2 { font-size: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; }
+      .work-card-img { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#home" class="nav-logo">Wyatt K.</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#mission">Studio</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#uiux">UI/UX</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Work With Me</a>
+  </nav>
+
+  <!-- REEL MODAL -->
+  <div class="reel-modal" id="reelModal">
+    <div class="reel-modal-inner">
+      <button class="reel-close" id="reelClose">Close</button>
+      <iframe id="reelFrame" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-eyebrow">Principal Motion Designer — Encinitas, CA</div>
+    <h1 class="hero-name">Wyatt<br>Ked<span>.</span></h1>
+    <div class="hero-roles">
+      <p>Principal Motion Designer at ClickUp</p>
+      <p>Co-Founder of Halogen</p>
+      <p>Creative Director at Gravity Payments</p>
+    </div>
+    <a href="#" class="hero-reel-btn" id="reelBtn">
+      <span class="play-icon"></span>
+      Watch 2025 Showreel
+    </a>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission">
+    <div class="mission-layout">
+      <div class="mission-text reveal">
+        <div class="eyebrow">The Motion Mission</div>
+        <h2>Bring products to life. Create experiences. Be memorable.</h2>
+        <p style="margin-top:32px;">Motion design at the intersection of brand, product, and storytelling. From Super Bowl spots to in-product animation systems — work that moves people, not just pixels.</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s">
+        <div class="logos-grid">
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5660cd2bdd072500a1c_gravity-payments_logo-white.svg" alt="Gravity Payments" />
+          </div>
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd640f07a62e74c4b29cd_ln-logo-white.svg" alt="LinkedIn" />
+          </div>
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd4c3d189d697fcf9aab6_Logo-light.svg" alt="ClickUp" />
+          </div>
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd59de8fcf931019c1b1c_ZI%20logo_neutral.svg" alt="ZoomInfo" />
+          </div>
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5ebf56ab30144f90498_netflix-3.svg" alt="Netflix" />
+          </div>
+          <div class="logo-cell">
+            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd9aec3facbaaec7d161c_halogen_logo_2026_V01.svg" alt="Halogen" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FANTASTIC FOUR -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div class="eyebrow">The Fantastic Four</div>
+      <h2>There's more to motion design than making things move.</h2>
+    </div>
+
+    <div class="services-tabs">
+      <button class="service-tab active" data-panel="branded">
+        <span class="tab-letter">A</span> Branded Motion
+      </button>
+      <button class="service-tab" data-panel="marketing">
+        <span class="tab-letter">B</span> Marketing
+      </button>
+      <button class="service-tab" data-panel="education">
+        <span class="tab-letter">C</span> Education
+      </button>
+      <button class="service-tab" data-panel="systems">
+        <span class="tab-letter">D</span> Systems & Scale
+      </button>
+    </div>
+
+    <div class="service-panel active" id="panel-branded">
+      <div class="service-video-wrap">
+        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6972915ed3dde361ac965e49_BRAND_V01_1_mp4.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="service-info">
+        <div>
+          <h3>Branded Motion</h3>
+          <p class="service-desc">Bring the brand to life. Motion that feels like the brand — its energy, its voice, its personality — expressed in time.</p>
+          <div class="service-tags">
+            <span class="service-tag">Visual Systems</span>
+            <span class="service-tag">Tone</span>
+            <span class="service-tag">Vibe</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-marketing">
+      <div class="service-video-wrap">
+        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F697150f9423e9b33919d8d7c_homepage3_mp4.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="service-info">
+        <div>
+          <h3>Marketing</h3>
+          <p class="service-desc">Create a spectacle and become unforgettable. Campaigns that stop the scroll and drive the click — from Super Bowl to social.</p>
+          <div class="service-tags">
+            <span class="service-tag">Style</span>
+            <span class="service-tag">Messaging</span>
+            <span class="service-tag">Hype</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-education">
+      <div class="service-video-wrap">
+        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6972914c7dbd343b8ed0c49b_EDUCATION_V01_mp4.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="service-info">
+        <div>
+          <h3>Education</h3>
+          <p class="service-desc">Think like the user, be the sherpa. Onboarding flows, explainers, and in-product walkthroughs that drive adoption at scale.</p>
+          <div class="service-tags">
+            <span class="service-tag">Adoption</span>
+            <span class="service-tag">User Experience</span>
+            <span class="service-tag">In-Product</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-systems">
+      <div class="service-video-wrap">
+        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F69729c6d1900b07a35a42b12_AUTOMATION_V02_mp4.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="service-info">
+        <div>
+          <h3>Systems, Automation & Scale</h3>
+          <p class="service-desc">The stuff that multiplies output. Motion infrastructure, reusable component libraries, and pipelines that make one animator feel like a team.</p>
+          <div class="service-tags">
+            <span class="service-tag">Reusability</span>
+            <span class="service-tag">Infrastructure</span>
+            <span class="service-tag">Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORKS -->
+  <section id="works">
+    <div class="works-header reveal">
+      <div>
+        <div class="eyebrow">Best of 2025</div>
+        <h2>/Selected <em>works.</em></h2>
+      </div>
+    </div>
+
+    <div class="works-grid">
+      <a href="#" class="work-card wide">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/696fe4a56a2ade69bf1e2569_super%20agents%202%20Large.jpeg" alt="Super Agents" />
+        <div class="work-card-overlay">
+          <div class="work-client">ClickUp</div>
+          <div class="work-title">Super Agents</div>
+          <div class="work-tools">
+            <span class="work-tool">Figma</span>
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Premiere Pro</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69700a385455e285ec2921cd_johnny-crash.jpeg" alt="Johnny Crash" />
+        <div class="work-card-overlay">
+          <div class="work-client">Halogen</div>
+          <div class="work-title">Johnny Crash</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Cinema 4D</span>
+            <span class="work-tool">FL Studio</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/696ffdff0bc2cbcfd9e1f10b_cu_4_0.jpg" alt="ClickUp 4.0" />
+        <div class="work-card-overlay">
+          <div class="work-client">ClickUp</div>
+          <div class="work-title">ClickUp 4.0</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Figma</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730e6ae7b1996af8b42fb1_2.jpeg" alt="Super Bowl LVI" />
+        <div class="work-card-overlay">
+          <div class="work-client">ClickUp</div>
+          <div class="work-title">Super Bowl LVI</div>
+          <div class="work-tools">
+            <span class="work-tool">Figma</span>
+            <span class="work-tool">After Effects</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/697310846d275ef9950a7d5a_5.jpeg" alt="It's About Time" />
+        <div class="work-card-overlay">
+          <div class="work-client">GaTa x ClickUp</div>
+          <div class="work-title">It's About Time</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Cinema 4D</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730cc74638ff692afa5a03_5.jpeg" alt="Afraid Of The Apps" />
+        <div class="work-card-overlay">
+          <div class="work-client">ClickUp</div>
+          <div class="work-title">Afraid Of The Apps</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Cinema 4D</span>
+            <span class="work-tool">Figma</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card wide">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730bf64819678d1bd60bb3_7.jpeg" alt="Color Blind" />
+        <div class="work-card-overlay">
+          <div class="work-client">Ked Danger</div>
+          <div class="work-title">Color Blind</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Premiere Pro</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="work-card">
+        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d6ae19f6ae17a73b877_1.jpeg" alt="LevelUp" />
+        <div class="work-card-overlay">
+          <div class="work-client">ClickUp</div>
+          <div class="work-title">LevelUp</div>
+          <div class="work-tools">
+            <span class="work-tool">After Effects</span>
+            <span class="work-tool">Cinema 4D</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- UI/UX MOTION -->
+  <section id="uiux">
+    <div class="uiux-layout">
+      <div class="uiux-left reveal">
+        <div class="eyebrow">Be Precise</div>
+        <h2>UI + UX Motion</h2>
+        <p>Where form meets function. Interactive design and SVG animations that live inside the product — not just around it. Built for precision, performance, and scalability.</p>
+      </div>
+      <div class="uiux-right reveal" style="transition-delay:0.15s">
+        <div class="uiux-video-wrap">
+          <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6996992bde8edebe9f21d593_Videos%202_mp4.mp4" autoplay muted loop playsinline></video>
+        </div>
+        <div class="rive-wrap">
+          <iframe src="https://rive.app/s/Aeus8uzjqEOqFWN9xmDfgw/embed?runtime=rive-renderer" allow="autoplay" title="Live Rive animation demo"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-header reveal">
+      <div class="eyebrow">Statline</div>
+      <h2>Eyeballs, then signups.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number">1M<span>+</span></div>
+        <div class="stat-label">Daily users interact with my work</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:0.1s">
+        <div class="stat-number">1,000<span>+</span></div>
+        <div class="stat-label">Shipped motion assets</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:0.2s">
+        <div class="stat-number">1B<span>+</span></div>
+        <div class="stat-label">Views across all platforms</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-layout">
+      <div class="contact-left reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Let's work together.</h2>
+        <p>Available for freelance projects, consulting, and creative collaborations. Based in Encinitas, CA — working with teams worldwide.</p>
+        <div class="contact-links">
+          <a href="https://www.instagram.com/ked.danger" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-icon">Ig</span> @ked.danger
+          </a>
+          <a href="https://www.linkedin.com/in/wyattkedinger/" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-icon">in</span> wyattkedinger
+          </a>
+          <a href="https://x.com/wyattkedinger" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-icon">𝕏</span> @wyattkedinger
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal" style="transition-delay:0.15s">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project…" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+          <p class="form-status" id="formStatus">Message sent — I'll be in touch.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#home" class="footer-logo">Wyatt K.</a>
+    <ul class="footer-links">
+      <li><a href="#mission">Studio</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#uiux">UI/UX</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Wyatt Kedinger</p>
+  </footer>
+
+  <script>
+    // Reel modal — swap YOUR Vimeo video ID here
+    const VIMEO_ID = 'YOUR_VIMEO_ID';
+    const reelBtn = document.getElementById('reelBtn');
+    const reelModal = document.getElementById('reelModal');
+    const reelClose = document.getElementById('reelClose');
+    const reelFrame = document.getElementById('reelFrame');
+
+    reelBtn.addEventListener('click', e => {
+      e.preventDefault();
+      reelFrame.src = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1`;
+      reelModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeModal() {
+      reelModal.classList.remove('open');
+      reelFrame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    reelClose.addEventListener('click', closeModal);
+    reelModal.addEventListener('click', e => { if (e.target === reelModal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Fantastic Four tabs
+    document.querySelectorAll('.service-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Contact form (Formspree)
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          status.style.display = 'block';
+          form.reset();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
