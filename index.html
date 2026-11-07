@@ -337,10 +337,12 @@ function layout(w,h){
 }
 function resize(){
   const w = hero.clientWidth, h = hero.clientHeight;
+  if (!w || !h) return; // page not visible yet; ResizeObserver will call again
   renderer.setSize(w,h,false);
   layout(w,h);
 }
-addEventListener('resize', resize); resize();
+new ResizeObserver(resize).observe(hero);
+resize();
 
 // ── interaction: drag / scroll adds flow, decays back ──
 let targetFlow=0, curFlow=0, pointer={x:0,y:0}, dragging=false, lastX=0, downX=0, downY=0, moved=false;
