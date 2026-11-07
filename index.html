@@ -1,1285 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Wyatt Kedinger — Principal Motion Designer. VFX, brand motion, product animation, and systems at scale." />
-  <title>Wyatt K.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --surface-2: #161616;
-      --border: #222222;
-      --accent: #e8ff3c;
-      --text: #f0f0f0;
-      --muted: #555555;
-      --muted-2: #888888;
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted-2);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .nav-cta {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--bg);
-      background: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      transition: opacity 0.2s;
-    }
-
-    .nav-cta:hover { opacity: 0.85; }
-
-    /* ─── HERO ─── */
-    #home {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 40px 80px;
-      padding-top: 100px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(64px, 10vw, 140px);
-      font-weight: 700;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 32px;
-    }
-
-    .hero-name span { color: var(--accent); }
-
-    .hero-roles {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 48px;
-    }
-
-    .hero-roles p {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--muted-2);
-      letter-spacing: 0.04em;
-    }
-
-    .hero-roles p::before {
-      content: '> ';
-      color: var(--accent);
-    }
-
-    .hero-reel-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 14px 24px;
-      transition: border-color 0.2s, background 0.2s;
-      width: fit-content;
-    }
-
-    .hero-reel-btn:hover {
-      border-color: var(--accent);
-      background: rgba(232,255,60,0.05);
-    }
-
-    .hero-reel-btn .play-icon {
-      width: 20px;
-      height: 20px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .hero-reel-btn .play-icon::after {
-      content: '';
-      border-left: 6px solid var(--accent);
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
-      margin-left: 2px;
-    }
-
-    /* reel modal */
-    .reel-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(0,0,0,0.95);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .reel-modal.open { display: flex; }
-
-    .reel-modal-inner {
-      position: relative;
-      width: 90vw;
-      max-width: 1100px;
-      aspect-ratio: 16/9;
-    }
-
-    .reel-modal-inner iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .reel-close {
-      position: absolute;
-      top: -48px;
-      right: 0;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .reel-close::before {
-      content: '✕';
-      font-size: 16px;
-    }
-
-    /* ─── SECTION SHARED ─── */
-    section {
-      padding: 120px 40px;
-    }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .eyebrow::after {
-      content: '';
-      flex: 1;
-      max-width: 60px;
-      height: 1px;
-      background: var(--border);
-    }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 5vw, 64px);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
-    }
-
-    /* ─── MISSION ─── */
-    #mission {
-      border-top: 1px solid var(--border);
-    }
-
-    .mission-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .mission-text h2 {
-      margin-bottom: 32px;
-    }
-
-    .mission-text p {
-      color: var(--muted-2);
-      font-size: 16px;
-      line-height: 1.8;
-      max-width: 480px;
-    }
-
-    .logos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      border: 1px solid var(--border);
-      margin-top: 24px;
-    }
-
-    .logo-cell {
-      aspect-ratio: 2/1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      border: 1px solid var(--border);
-      filter: brightness(0) invert(1);
-      opacity: 0.3;
-      transition: opacity 0.2s;
-    }
-
-    .logo-cell:hover { opacity: 0.7; }
-
-    .logo-cell img {
-      max-width: 100%;
-      max-height: 28px;
-      object-fit: contain;
-    }
-
-    /* ─── FANTASTIC FOUR ─── */
-    #services {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    .services-header {
-      margin-bottom: 64px;
-    }
-
-    .services-header h2 {
-      max-width: 640px;
-      margin-top: 16px;
-    }
-
-    .services-tabs {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-
-    .service-tab {
-      flex: 1;
-      padding: 16px 20px;
-      border: none;
-      border-right: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .service-tab:last-child { border-right: none; }
-
-    .service-tab .tab-letter {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--border);
-      transition: color 0.2s;
-      font-family: var(--font-display);
-    }
-
-    .service-tab.active,
-    .service-tab:hover {
-      background: var(--surface-2);
-      color: var(--text);
-    }
-
-    .service-tab.active .tab-letter,
-    .service-tab:hover .tab-letter { color: var(--accent); }
-
-    .service-panel {
-      display: none;
-      border: 1px solid var(--border);
-      border-top: none;
-    }
-
-    .service-panel.active { display: grid; grid-template-columns: 1fr 1fr; }
-
-    .service-video-wrap {
-      aspect-ratio: 16/9;
-      background: #000;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-video-wrap video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .service-info {
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .service-info h3 {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .service-info .service-desc {
-      font-size: 15px;
-      color: var(--muted-2);
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .service-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .service-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted-2);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-    }
-
-    /* ─── WORKS ─── */
-    #works {
-      border-top: 1px solid var(--border);
-    }
-
-    .works-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 64px;
-    }
-
-    .works-header h2 em {
-      font-style: italic;
-      color: var(--muted);
-    }
-
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .work-card {
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      display: block;
-      text-decoration: none;
-    }
-
-    .work-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease, filter 0.3s;
-      filter: brightness(0.7);
-    }
-
-    .work-card:hover .work-card-img {
-      transform: scale(1.04);
-      filter: brightness(0.5);
-    }
-
-    .work-card-overlay {
-      position: absolute;
-      inset: 0;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
-    }
-
-    .work-client {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .work-title {
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      margin-bottom: 10px;
-    }
-
-    .work-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .work-tool {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(240,240,240,0.5);
-      border: 1px solid rgba(240,240,240,0.15);
-      padding: 3px 8px;
-    }
-
-    /* large card spans 2 */
-    .work-card.wide {
-      grid-column: span 2;
-      aspect-ratio: auto;
-      min-height: 340px;
-    }
-
-    /* ─── UI/UX MOTION ─── */
-    #uiux {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    .uiux-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .uiux-left h2 {
-      margin-top: 16px;
-      margin-bottom: 24px;
-    }
-
-    .uiux-left p {
-      color: var(--muted-2);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .uiux-right {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .uiux-video-wrap {
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .uiux-video-wrap video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .rive-wrap {
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .rive-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* ─── STATS ─── */
-    #stats {
-      border-top: 1px solid var(--border);
-    }
-
-    .stats-header {
-      margin-bottom: 80px;
-    }
-
-    .stats-header h2 {
-      max-width: 640px;
-      margin-top: 16px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .stat-card {
-      background: var(--bg);
-      padding: 48px 40px;
-    }
-
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: clamp(48px, 6vw, 80px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-number span { color: var(--accent); }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* ─── CONTACT ─── */
-    #contact {
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .contact-left h2 {
-      margin-top: 16px;
-      margin-bottom: 24px;
-    }
-
-    .contact-left p {
-      color: var(--muted-2);
-      font-size: 15px;
-      line-height: 1.8;
-      max-width: 420px;
-    }
-
-    .contact-links {
-      margin-top: 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      text-decoration: none;
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .contact-link:hover { color: var(--accent); }
-
-    .contact-link-icon {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      flex-shrink: 0;
-      transition: border-color 0.2s;
-    }
-
-    .contact-link:hover .contact-link-icon { border-color: var(--accent); }
-
-    .contact-right {
-      padding-top: 16px;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-group label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 14px;
-      padding: 14px 16px;
-      transition: border-color 0.2s;
-      resize: none;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--accent); }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--muted); }
-
-    .form-submit {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 16px 32px;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      align-self: flex-start;
-    }
-
-    .form-submit:hover { opacity: 0.85; }
-
-    .form-status {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 0.06em;
-      display: none;
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 48px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--text); }
-
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      section { padding: 80px 24px; }
-      #home { padding: 100px 24px 60px; }
-      .mission-layout,
-      .uiux-layout,
-      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-      .works-grid { grid-template-columns: 1fr 1fr; }
-      .work-card.wide { grid-column: span 1; aspect-ratio: 4/3; }
-      .stats-grid { grid-template-columns: 1fr; }
-      .service-panel.active { grid-template-columns: 1fr; }
-      .service-video-wrap { aspect-ratio: 16/9; }
-      .logos-grid { grid-template-columns: repeat(2, 1fr); }
-      footer { flex-direction: column; gap: 24px; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
-      .services-tabs { flex-wrap: wrap; }
-      .service-tab { flex: none; width: 50%; border-bottom: 1px solid var(--border); }
-    }
-
-    @media (max-width: 560px) {
-      .works-grid { grid-template-columns: 1fr; }
-      h2 { font-size: 28px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { transition: none; }
-      .work-card-img { transition: none; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wyatt Kedinger</title>
+<meta name="description" content="Wyatt Kedinger — Principal Motion Designer. Selected work in brand motion, product animation, and film." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#f2ede6; --ink:#111110; --muted:#8a847b; --line:#d8d3cc;
+    --dark:#0a0a0a;
+    --font-d:'Space Grotesk',sans-serif; --font-b:'Inter',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:15px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* ── HERO / MORPH ── */
+  #hero{position:relative;width:100%;height:100vh;height:100dvh;background:var(--dark);overflow:hidden}
+  #morph-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer;touch-action:none}
+
+  .hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:28px 32px}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .hero-mark{font-family:var(--font-d);font-weight:600;font-size:16px;color:#fff;letter-spacing:-0.01em;mix-blend-mode:difference}
+  .hero-nav{display:flex;gap:22px;pointer-events:auto}
+  .hero-nav a{font-size:12px;color:rgba(255,255,255,.75);letter-spacing:.02em;transition:color .2s;mix-blend-mode:difference}
+  .hero-nav a:hover{color:#fff}
+  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  .hero-headline{font-family:var(--font-d);font-weight:500;font-size:clamp(28px,4.5vw,56px);line-height:1.02;letter-spacing:-0.03em;color:#fff;max-width:14ch;mix-blend-mode:difference}
+  .hero-sub{font-size:13px;color:rgba(255,255,255,.7);text-align:right;line-height:1.7;mix-blend-mode:difference}
+  .hero-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:2;pointer-events:none;animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:.8}}
+
+  /* hover label for the cell under the cursor */
+  #cell-label{position:absolute;z-index:3;pointer-events:none;font-family:var(--font-d);font-weight:500;font-size:13px;color:#fff;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:7px 12px;border-radius:2px;opacity:0;transform:translate(-50%,-140%);transition:opacity .18s;white-space:nowrap}
+  #cell-label .client{color:rgba(255,255,255,.6);font-family:var(--font-b);font-weight:400;font-size:11px;margin-left:8px}
+
+  /* ── SOLO PLAYER ── */
+  #solo{position:fixed;inset:0;z-index:50;background:rgba(6,6,6,.97);display:none;align-items:center;justify-content:center;flex-direction:column;padding:40px}
+  #solo.open{display:flex}
+  .solo-frame{position:relative;width:min(92vw,1180px);aspect-ratio:16/9;background:#000;box-shadow:0 30px 120px rgba(0,0,0,.6)}
+  .solo-frame iframe{width:100%;height:100%;border:none}
+  .solo-meta{display:flex;justify-content:space-between;align-items:center;width:min(92vw,1180px);margin-top:18px;gap:16px}
+  .solo-title{font-family:var(--font-d);font-weight:600;font-size:20px;color:#fff;letter-spacing:-0.01em}
+  .solo-client{font-size:13px;color:rgba(255,255,255,.55);margin-top:2px}
+  .solo-tools{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+  .solo-tool{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:4px 9px}
+  .solo-close{position:absolute;top:-38px;right:0;background:none;border:none;color:#fff;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:flex;gap:7px;align-items:center}
+  .solo-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.6);font-size:40px;cursor:pointer;padding:20px;transition:color .2s;font-family:var(--font-d)}
+  .solo-nav:hover{color:#fff}
+  .solo-prev{left:-4px} .solo-next{right:-4px}
+  @media(max-width:700px){.solo-nav{display:none}}
+
+  /* ── SECTIONS BELOW ── */
+  .section{border-bottom:1px solid var(--line)}
+  .section-inner{padding:88px 32px;max-width:1280px;margin:0 auto}
+  h2{font-family:var(--font-d);font-weight:500;font-size:clamp(28px,4vw,50px);letter-spacing:-0.025em;line-height:1.08}
+  .lede{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+
+  /* mission */
+  #mission .section-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;align-items:start}
+  #mission p{font-size:15px;color:var(--muted);line-height:1.8;max-width:42ch;margin-top:24px}
+  .logos{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line)}
+  .logos div{aspect-ratio:2.4/1;display:flex;align-items:center;justify-content:center;padding:22px;border:1px solid var(--line)}
+  .logos img{max-height:24px;max-width:72%;object-fit:contain;filter:grayscale(1);opacity:.55;transition:opacity .2s}
+  .logos div:hover img{opacity:.9}
+
+  /* services */
+  #services h2{margin-bottom:40px;max-width:16ch}
+  .srv{border-top:1px solid var(--line)}
+  .srv-row{display:grid;grid-template-columns:56px 1fr;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:padding-left .3s}
+  .srv-row:hover{padding-left:12px;background:linear-gradient(90deg,rgba(17,17,16,.03),transparent)}
+  .srv-k{font-family:var(--font-d);font-size:24px;font-weight:400;color:var(--muted)}
+  .srv-row:hover .srv-k{color:var(--ink)}
+  .srv-t{font-family:var(--font-d);font-size:19px;font-weight:500;letter-spacing:-0.01em}
+  .srv-d{font-size:13px;color:var(--muted);margin-top:5px;max-width:52ch}
+
+  /* stats */
+  #stats .section-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .stat{padding:8px 36px 8px 0}
+  .stat:not(:last-child){border-right:1px solid var(--line)}
+  .stat:not(:first-child){padding-left:36px}
+  .stat-n{font-family:var(--font-d);font-weight:500;font-size:clamp(44px,5.5vw,72px);letter-spacing:-0.04em;line-height:1}
+  .stat-l{font-size:13px;color:var(--muted);margin-top:10px;max-width:22ch}
+
+  /* contact */
+  #contact .section-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+  #contact h2{margin-bottom:18px}
+  #contact p{font-size:15px;color:var(--muted);line-height:1.8;max-width:40ch}
+  .socials{border:1px solid var(--line);margin-top:8px}
+  .socials a{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);font-size:13px;transition:background .2s}
+  .socials a:last-child{border-bottom:none}
+  .socials a:hover{background:rgba(17,17,16,.03)}
+  .socials .lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  footer{padding:36px 32px;display:flex;justify-content:space-between;align-items:center;max-width:1280px;margin:0 auto}
+  .foot-mark{font-family:var(--font-d);font-weight:600;font-size:15px}
+  .foot-c{font-size:11px;color:var(--muted)}
+
+  @media(max-width:860px){
+    .section-inner{padding:60px 20px}
+    #mission .section-inner,#contact .section-inner{grid-template-columns:1fr;gap:40px}
+    #stats .section-inner{grid-template-columns:1fr}
+    .stat{border-right:none!important;border-bottom:1px solid var(--line);padding:28px 0!important}
+    .stat:last-child{border-bottom:none}
+    .hero-nav{display:none}
+    .hero-hint{display:none}
+    .hero-bottom{flex-direction:column;align-items:flex-start}
+    .hero-sub{text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){.hero-hint{animation:none}}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#home" class="nav-logo">Wyatt K.</a>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#mission">Studio</a></li>
-      <li><a href="#works">Works</a></li>
-      <li><a href="#uiux">UI/UX</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Work With Me</a>
-  </nav>
-
-  <!-- REEL MODAL -->
-  <div class="reel-modal" id="reelModal">
-    <div class="reel-modal-inner">
-      <button class="reel-close" id="reelClose">Close</button>
-      <iframe id="reelFrame" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="morph-canvas"></canvas>
+  <div id="cell-label"><span class="name"></span><span class="client"></span></div>
+  <div class="hero-overlay">
+    <div class="hero-top">
+      <div class="hero-mark">Wyatt Kedinger</div>
+      <nav class="hero-nav">
+        <a href="#mission">Studio</a>
+        <a href="#services">Approach</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="hero-bottom">
+      <h1 class="hero-headline">Principal Motion Designer</h1>
+      <div class="hero-sub">Selected work — 2024–2026<br>Brand motion · Product · Film</div>
     </div>
   </div>
+  <div class="hero-hint">Click a tile to play · drag to morph</div>
+</section>
 
-  <!-- HERO -->
-  <section id="home">
-    <div class="hero-eyebrow">Principal Motion Designer — Encinitas, CA</div>
-    <h1 class="hero-name">Wyatt<br>Ked<span>.</span></h1>
-    <div class="hero-roles">
-      <p>Principal Motion Designer at ClickUp</p>
-      <p>Co-Founder of Halogen</p>
-      <p>Creative Director at Gravity Payments</p>
+<!-- ══ SOLO PLAYER ══ -->
+<div id="solo">
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center">
+    <div class="solo-frame">
+      <button class="solo-close" id="soloClose">✕ Close</button>
+      <button class="solo-nav solo-prev" id="soloPrev">‹</button>
+      <button class="solo-nav solo-next" id="soloNext">›</button>
+      <iframe id="soloFrame" src="" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>
     </div>
-    <a href="#" class="hero-reel-btn" id="reelBtn">
-      <span class="play-icon"></span>
-      Watch 2025 Showreel
-    </a>
-  </section>
-
-  <!-- MISSION -->
-  <section id="mission">
-    <div class="mission-layout">
-      <div class="mission-text reveal">
-        <div class="eyebrow">The Motion Mission</div>
-        <h2>Bring products to life. Create experiences. Be memorable.</h2>
-        <p style="margin-top:32px;">Motion design at the intersection of brand, product, and storytelling. From Super Bowl spots to in-product animation systems — work that moves people, not just pixels.</p>
-      </div>
-      <div class="reveal" style="transition-delay:0.15s">
-        <div class="logos-grid">
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5660cd2bdd072500a1c_gravity-payments_logo-white.svg" alt="Gravity Payments" />
-          </div>
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd640f07a62e74c4b29cd_ln-logo-white.svg" alt="LinkedIn" />
-          </div>
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd4c3d189d697fcf9aab6_Logo-light.svg" alt="ClickUp" />
-          </div>
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd59de8fcf931019c1b1c_ZI%20logo_neutral.svg" alt="ZoomInfo" />
-          </div>
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5ebf56ab30144f90498_netflix-3.svg" alt="Netflix" />
-          </div>
-          <div class="logo-cell">
-            <img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd9aec3facbaaec7d161c_halogen_logo_2026_V01.svg" alt="Halogen" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FANTASTIC FOUR -->
-  <section id="services">
-    <div class="services-header reveal">
-      <div class="eyebrow">The Fantastic Four</div>
-      <h2>There's more to motion design than making things move.</h2>
-    </div>
-
-    <div class="services-tabs">
-      <button class="service-tab active" data-panel="branded">
-        <span class="tab-letter">A</span> Branded Motion
-      </button>
-      <button class="service-tab" data-panel="marketing">
-        <span class="tab-letter">B</span> Marketing
-      </button>
-      <button class="service-tab" data-panel="education">
-        <span class="tab-letter">C</span> Education
-      </button>
-      <button class="service-tab" data-panel="systems">
-        <span class="tab-letter">D</span> Systems & Scale
-      </button>
-    </div>
-
-    <div class="service-panel active" id="panel-branded">
-      <div class="service-video-wrap">
-        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6972915ed3dde361ac965e49_BRAND_V01_1_mp4.mp4" autoplay muted loop playsinline></video>
-      </div>
-      <div class="service-info">
-        <div>
-          <h3>Branded Motion</h3>
-          <p class="service-desc">Bring the brand to life. Motion that feels like the brand — its energy, its voice, its personality — expressed in time.</p>
-          <div class="service-tags">
-            <span class="service-tag">Visual Systems</span>
-            <span class="service-tag">Tone</span>
-            <span class="service-tag">Vibe</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-panel" id="panel-marketing">
-      <div class="service-video-wrap">
-        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F697150f9423e9b33919d8d7c_homepage3_mp4.mp4" autoplay muted loop playsinline></video>
-      </div>
-      <div class="service-info">
-        <div>
-          <h3>Marketing</h3>
-          <p class="service-desc">Create a spectacle and become unforgettable. Campaigns that stop the scroll and drive the click — from Super Bowl to social.</p>
-          <div class="service-tags">
-            <span class="service-tag">Style</span>
-            <span class="service-tag">Messaging</span>
-            <span class="service-tag">Hype</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-panel" id="panel-education">
-      <div class="service-video-wrap">
-        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6972914c7dbd343b8ed0c49b_EDUCATION_V01_mp4.mp4" autoplay muted loop playsinline></video>
-      </div>
-      <div class="service-info">
-        <div>
-          <h3>Education</h3>
-          <p class="service-desc">Think like the user, be the sherpa. Onboarding flows, explainers, and in-product walkthroughs that drive adoption at scale.</p>
-          <div class="service-tags">
-            <span class="service-tag">Adoption</span>
-            <span class="service-tag">User Experience</span>
-            <span class="service-tag">In-Product</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-panel" id="panel-systems">
-      <div class="service-video-wrap">
-        <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F69729c6d1900b07a35a42b12_AUTOMATION_V02_mp4.mp4" autoplay muted loop playsinline></video>
-      </div>
-      <div class="service-info">
-        <div>
-          <h3>Systems, Automation & Scale</h3>
-          <p class="service-desc">The stuff that multiplies output. Motion infrastructure, reusable component libraries, and pipelines that make one animator feel like a team.</p>
-          <div class="service-tags">
-            <span class="service-tag">Reusability</span>
-            <span class="service-tag">Infrastructure</span>
-            <span class="service-tag">Automation</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SELECTED WORKS -->
-  <section id="works">
-    <div class="works-header reveal">
+    <div class="solo-meta">
       <div>
-        <div class="eyebrow">Best of 2025</div>
-        <h2>/Selected <em>works.</em></h2>
+        <div class="solo-title" id="soloTitle"></div>
+        <div class="solo-client" id="soloClient"></div>
       </div>
+      <div class="solo-tools" id="soloTools"></div>
     </div>
+  </div>
+</div>
 
-    <div class="works-grid">
-      <a href="#" class="work-card wide">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/696fe4a56a2ade69bf1e2569_super%20agents%202%20Large.jpeg" alt="Super Agents" />
-        <div class="work-card-overlay">
-          <div class="work-client">ClickUp</div>
-          <div class="work-title">Super Agents</div>
-          <div class="work-tools">
-            <span class="work-tool">Figma</span>
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Premiere Pro</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69700a385455e285ec2921cd_johnny-crash.jpeg" alt="Johnny Crash" />
-        <div class="work-card-overlay">
-          <div class="work-client">Halogen</div>
-          <div class="work-title">Johnny Crash</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Cinema 4D</span>
-            <span class="work-tool">FL Studio</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/696ffdff0bc2cbcfd9e1f10b_cu_4_0.jpg" alt="ClickUp 4.0" />
-        <div class="work-card-overlay">
-          <div class="work-client">ClickUp</div>
-          <div class="work-title">ClickUp 4.0</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Figma</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730e6ae7b1996af8b42fb1_2.jpeg" alt="Super Bowl LVI" />
-        <div class="work-card-overlay">
-          <div class="work-client">ClickUp</div>
-          <div class="work-title">Super Bowl LVI</div>
-          <div class="work-tools">
-            <span class="work-tool">Figma</span>
-            <span class="work-tool">After Effects</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/697310846d275ef9950a7d5a_5.jpeg" alt="It's About Time" />
-        <div class="work-card-overlay">
-          <div class="work-client">GaTa x ClickUp</div>
-          <div class="work-title">It's About Time</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Cinema 4D</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730cc74638ff692afa5a03_5.jpeg" alt="Afraid Of The Apps" />
-        <div class="work-card-overlay">
-          <div class="work-client">ClickUp</div>
-          <div class="work-title">Afraid Of The Apps</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Cinema 4D</span>
-            <span class="work-tool">Figma</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card wide">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730bf64819678d1bd60bb3_7.jpeg" alt="Color Blind" />
-        <div class="work-card-overlay">
-          <div class="work-client">Ked Danger</div>
-          <div class="work-title">Color Blind</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Premiere Pro</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="#" class="work-card">
-        <img class="work-card-img" src="https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d6ae19f6ae17a73b877_1.jpeg" alt="LevelUp" />
-        <div class="work-card-overlay">
-          <div class="work-client">ClickUp</div>
-          <div class="work-title">LevelUp</div>
-          <div class="work-tools">
-            <span class="work-tool">After Effects</span>
-            <span class="work-tool">Cinema 4D</span>
-          </div>
-        </div>
-      </a>
+<!-- ══ MISSION ══ -->
+<section id="mission" class="section">
+  <div class="section-inner">
+    <div>
+      <div class="lede">The work</div>
+      <h2>Motion that makes products feel alive and brands impossible to ignore.</h2>
+      <p>Fifteen years across feature film VFX, Super Bowl spots, and in-product animation systems. The tile wall above is the real work — click any piece to watch it.</p>
     </div>
-  </section>
-
-  <!-- UI/UX MOTION -->
-  <section id="uiux">
-    <div class="uiux-layout">
-      <div class="uiux-left reveal">
-        <div class="eyebrow">Be Precise</div>
-        <h2>UI + UX Motion</h2>
-        <p>Where form meets function. Interactive design and SVG animations that live inside the product — not just around it. Built for precision, performance, and scalability.</p>
-      </div>
-      <div class="uiux-right reveal" style="transition-delay:0.15s">
-        <div class="uiux-video-wrap">
-          <video src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921%2F6996992bde8edebe9f21d593_Videos%202_mp4.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="rive-wrap">
-          <iframe src="https://rive.app/s/Aeus8uzjqEOqFWN9xmDfgw/embed?runtime=rive-renderer" allow="autoplay" title="Live Rive animation demo"></iframe>
-        </div>
-      </div>
+    <div class="logos">
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd4c3d189d697fcf9aab6_Logo-light.svg" alt="ClickUp"/></div>
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5660cd2bdd072500a1c_gravity-payments_logo-white.svg" alt="Gravity Payments"/></div>
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd640f07a62e74c4b29cd_ln-logo-white.svg" alt="LinkedIn"/></div>
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd5ebf56ab30144f90498_netflix-3.svg" alt="Netflix"/></div>
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd59de8fcf931019c1b1c_ZI%20logo_neutral.svg" alt="ZoomInfo"/></div>
+      <div><img src="https://cdn.prod.website-files.com/696c6ad3186a173d71128921/696fd9aec3facbaaec7d161c_halogen_logo_2026_V01.svg" alt="Halogen"/></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- STATS -->
-  <section id="stats">
-    <div class="stats-header reveal">
-      <div class="eyebrow">Statline</div>
-      <h2>Eyeballs, then signups.</h2>
+<!-- ══ APPROACH ══ -->
+<section id="services" class="section">
+  <div class="section-inner">
+    <div class="lede">Approach</div>
+    <h2>There's more to motion than making things move.</h2>
+    <div class="srv">
+      <div class="srv-row"><div class="srv-k">A</div><div><div class="srv-t">Branded Motion</div><div class="srv-d">Visual systems that carry a brand's energy and voice into time.</div></div></div>
+      <div class="srv-row"><div class="srv-k">B</div><div><div class="srv-t">Marketing</div><div class="srv-d">Campaigns that stop the scroll — from Super Bowl to social.</div></div></div>
+      <div class="srv-row"><div class="srv-k">C</div><div><div class="srv-t">Education</div><div class="srv-d">Onboarding, explainers and in-product walkthroughs that drive adoption.</div></div></div>
+      <div class="srv-row"><div class="srv-k">D</div><div><div class="srv-t">Systems &amp; Scale</div><div class="srv-d">Motion infrastructure and component libraries that multiply output.</div></div></div>
     </div>
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <div class="stat-number">1M<span>+</span></div>
-        <div class="stat-label">Daily users interact with my work</div>
-      </div>
-      <div class="stat-card reveal" style="transition-delay:0.1s">
-        <div class="stat-number">1,000<span>+</span></div>
-        <div class="stat-label">Shipped motion assets</div>
-      </div>
-      <div class="stat-card reveal" style="transition-delay:0.2s">
-        <div class="stat-number">1B<span>+</span></div>
-        <div class="stat-label">Views across all platforms</div>
-      </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section id="stats" class="section">
+  <div class="section-inner">
+    <div class="stat"><div class="stat-n">1M+</div><div class="stat-l">Daily users touch the work</div></div>
+    <div class="stat"><div class="stat-n">1,000+</div><div class="stat-l">Shipped motion assets</div></div>
+    <div class="stat"><div class="stat-n">1B+</div><div class="stat-l">Views across platforms</div></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="section">
+  <div class="section-inner">
+    <div>
+      <div class="lede">Contact</div>
+      <h2>Let's work together.</h2>
+      <p>Available for freelance, consulting, and creative collaboration. Based in Encinitas, CA — working with teams anywhere.</p>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-layout">
-      <div class="contact-left reveal">
-        <div class="eyebrow">Contact</div>
-        <h2>Let's work together.</h2>
-        <p>Available for freelance projects, consulting, and creative collaborations. Based in Encinitas, CA — working with teams worldwide.</p>
-        <div class="contact-links">
-          <a href="https://www.instagram.com/ked.danger" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-link-icon">Ig</span> @ked.danger
-          </a>
-          <a href="https://www.linkedin.com/in/wyattkedinger/" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-link-icon">in</span> wyattkedinger
-          </a>
-          <a href="https://x.com/wyattkedinger" target="_blank" rel="noopener" class="contact-link">
-            <span class="contact-link-icon">𝕏</span> @wyattkedinger
-          </a>
-        </div>
-      </div>
-      <div class="contact-right reveal" style="transition-delay:0.15s">
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project…" required></textarea>
-          </div>
-          <button type="submit" class="form-submit">Send Message</button>
-          <p class="form-status" id="formStatus">Message sent — I'll be in touch.</p>
-        </form>
-      </div>
+    <div class="socials">
+      <a href="https://www.instagram.com/ked.danger" target="_blank" rel="noopener"><span class="lbl">Instagram</span><span>@ked.danger</span></a>
+      <a href="https://www.linkedin.com/in/wyattkedinger/" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span><span>wyattkedinger</span></a>
+      <a href="https://x.com/wyattkedinger" target="_blank" rel="noopener"><span class="lbl">X</span><span>@wyattkedinger</span></a>
+      <a href="mailto:wyatt.kedinger@gmail.com"><span class="lbl">Email</span><span>wyatt.kedinger@gmail.com</span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <a href="#home" class="footer-logo">Wyatt K.</a>
-    <ul class="footer-links">
-      <li><a href="#mission">Studio</a></li>
-      <li><a href="#works">Works</a></li>
-      <li><a href="#uiux">UI/UX</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <p class="footer-copy">© 2025 Wyatt Kedinger</p>
-  </footer>
+<footer>
+  <div class="foot-mark">Wyatt Kedinger</div>
+  <div class="foot-c">© 2026 — Encinitas, CA</div>
+</footer>
 
-  <script>
-    // Reel modal — swap YOUR Vimeo video ID here
-    const VIMEO_ID = 'YOUR_VIMEO_ID';
-    const reelBtn = document.getElementById('reelBtn');
-    const reelModal = document.getElementById('reelModal');
-    const reelClose = document.getElementById('reelClose');
-    const reelFrame = document.getElementById('reelFrame');
+<script type="importmap">
+{ "imports": { "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
 
-    reelBtn.addEventListener('click', e => {
-      e.preventDefault();
-      reelFrame.src = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1`;
-      reelModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
+// ─────────── PROJECT DATA ───────────
+const PROJECTS = [
+  { title:"OpenAI x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279211"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d8b06c8a56d635166072_openaiclickup_2.png", tools:["After Effects","Figma"] },
+  { title:"Cursor x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279737"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d83d248cc8e4b0196da0_Cursorclickup_4.png", tools:["After Effects","Figma"] },
+  { title:"Color Blind", client:"Ked Danger", video:{type:"vimeo",id:"1157445016"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730c01afb3a2454afcce64_2.jpg", tools:["After Effects","Premiere Pro"] },
+  { title:"Afraid Of The Apps", client:"ClickUp", video:{type:"youtube",id:"RR69tFQeSH0"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d07761b276eec019df7_6.jpeg", tools:["After Effects","Cinema 4D"] },
+  { title:"LevelUp", client:"ClickUp", video:{type:"vimeo",id:"1132656229"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d705fbcf52aafe8b61d_2.jpeg", tools:["After Effects","Cinema 4D"] },
+  { title:"ClickUp 4.0 — Work Different", client:"ClickUp", video:{type:"youtube",id:"i5ChP35iJPw"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6ad6f77d9b4e794b5e584613_Screenshot%202026-10-19%20at%2010.08.55%E2%80%AFPM.png", tools:["After Effects","Figma"] },
+  { title:"Super Bowl LVI", client:"ClickUp", video:{type:"youtube",id:"AirnL1NxOAw"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730e5a70ee7f868747a408_7.jpeg", tools:["Figma","After Effects"] },
+  { title:"ClickUp 4.0 — Launch", client:"ClickUp", video:{type:"youtube",id:"feAJjhF4_-M"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730eec5eaf32265a78d1eb_1.jpeg", tools:["After Effects","Figma"] },
+  { title:"Johnny Crash", client:"Halogen", video:{type:"youtube",id:"1AsjldJIsIA"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69731016e19f6ae17a740af4_11.jpeg", tools:["After Effects","Cinema 4D","FL Studio"] },
+  { title:"It's About Time", client:"GaTa x ClickUp", video:{type:"youtube",id:"OI7t8GW1jxo"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/697310c5d988797aee91b051_1.jpeg", tools:["After Effects","Cinema 4D"] },
+];
+// 5×2 on wide screens, 2×5 on phones
+let COLS=5, ROWS=2;
 
-    function closeModal() {
-      reelModal.classList.remove('open');
-      reelFrame.src = '';
-      document.body.style.overflow = '';
-    }
+// ─────────── WEBGL MORPH GRID ───────────
+const canvas = document.getElementById('morph-canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0a);
+const camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
 
-    reelClose.addEventListener('click', closeModal);
-    reelModal.addEventListener('click', e => { if (e.target === reelModal) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+const loader = new THREE.TextureLoader();
+loader.crossOrigin = 'anonymous';
+const meshes = [];
+const textures = PROJECTS.map((p,i) => {
+  const t = loader.load(p.poster, tex => {
+    const a = tex.image.width / tex.image.height;
+    if (meshes[i]) meshes[i].material.uniforms.imgAspect.value = a;
+  });
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.minFilter = THREE.LinearFilter;
+  t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+  return t;
+});
 
-    // Fantastic Four tabs
-    document.querySelectorAll('.service-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
-      });
-    });
+// one quad per cell, displacement-morph shader driven by a shared "flow" uniform
+const uShared = { flow:{value:0}, time:{value:0} };
+const vert = `
+  varying vec2 vUv;
+  void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }
+`;
+const frag = `
+  precision highp float;
+  varying vec2 vUv;
+  uniform sampler2D tex;
+  uniform float flow;   // 0..1 morph intensity
+  uniform float time;
+  uniform vec2  cell;   // cell index
+  uniform float imgAspect;  // texture w/h
+  uniform float cellAspect; // cell w/h in pixels
+  // cheap value noise
+  float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+  float noise(vec2 p){
+    vec2 i=floor(p), f=fract(p);
+    float a=hash(i), b=hash(i+vec2(1,0)), c=hash(i+vec2(0,1)), d=hash(i+vec2(1,1));
+    vec2 u=f*f*(3.0-2.0*f);
+    return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+  }
+  void main(){
+    // cover-fit: crop the image to fill the cell without stretching
+    vec2 uv = vUv - 0.5;
+    if (cellAspect < imgAspect) { uv.x *= cellAspect / imgAspect; }
+    else { uv.y *= imgAspect / cellAspect; }
+    uv += 0.5;
+    float n = noise(vUv*3.0 + cell*7.0 + time*0.15);
+    // displacement grows with flow; pinch toward center for a liquid feel
+    vec2 dir = vUv - 0.5;
+    float disp = flow * (0.12*n + 0.05*sin(time*0.6 + cell.x*2.0));
+    uv += dir * disp - vec2(0.0, flow*0.02*n);
+    vec3 col = texture2D(tex, uv).rgb;
+    // slight desaturate + lift toward the warm page tone at rest
+    float g = dot(col, vec3(0.299,0.587,0.114));
+    col = mix(col, vec3(g), flow*0.25);
+    col *= (1.0 - flow*0.12);
+    gl_FragColor = vec4(col,1.0);
+  }
+`;
 
-    // Scroll reveal
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+let cw=1, ch=1;
+PROJECTS.forEach((p,i)=>{
+  const mat = new THREE.ShaderMaterial({
+    vertexShader:vert, fragmentShader:frag,
+    uniforms:{ tex:{value:textures[i]}, flow:uShared.flow, time:uShared.time, cell:{value:new THREE.Vector2()}, imgAspect:{value:16/9}, cellAspect:{value:1} }
+  });
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1,1), mat);
+  scene.add(m); meshes.push(m);
+});
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const hero = document.getElementById('hero');
+function layout(w,h){
+  const narrow = w < 700;
+  COLS = narrow ? 2 : 5; ROWS = narrow ? 5 : 2;
+  const gapX = 8/w*2, gapY = 8/h*2; // 8px gutters regardless of screen
+  cw = (2 - gapX*(COLS+1))/COLS;
+  ch = (2 - gapY*(ROWS+1))/ROWS;
+  meshes.forEach((m,i)=>{
+    const col=i%COLS, row=Math.floor(i/COLS);
+    const x0=-1+gapX+col*(cw+gapX), y0=1-gapY-row*(ch+gapY)-ch;
+    m.geometry.dispose();
+    const g=new THREE.PlaneGeometry(cw,ch); g.translate(x0+cw/2,y0+ch/2,0);
+    m.geometry=g;
+    m.material.uniforms.cell.value.set(col,row);
+    m.material.uniforms.cellAspect.value=(cw*w)/(ch*h);
+  });
+}
+function resize(){
+  const w = hero.clientWidth, h = hero.clientHeight;
+  renderer.setSize(w,h,false);
+  layout(w,h);
+}
+addEventListener('resize', resize); resize();
 
-    // Contact form (Formspree)
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
+// ── interaction: drag / scroll adds flow, decays back ──
+let targetFlow=0, curFlow=0, pointer={x:0,y:0}, dragging=false, lastX=0, downX=0, downY=0, moved=false;
+canvas.addEventListener('pointerdown', e=>{dragging=true;moved=false;lastX=downX=e.clientX;downY=e.clientY;});
+addEventListener('pointerup', ()=>dragging=false);
+addEventListener('pointermove', e=>{
+  pointer.x=e.clientX; pointer.y=e.clientY;
+  if(dragging && Math.hypot(e.clientX-downX, e.clientY-downY) > 6) moved=true;
+  if(dragging){ targetFlow=Math.min(1, targetFlow+Math.abs(e.clientX-lastX)/400); lastX=e.clientX; }
+  updateLabel(e.clientX,e.clientY);
+});
+hero.addEventListener('wheel', ()=>{ targetFlow=Math.min(1,targetFlow+0.12); }, {passive:true});
 
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const data = new FormData(form);
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          status.style.display = 'block';
-          form.reset();
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    });
-  </script>
+// ── hover label + click to solo ──
+const label = document.getElementById('cell-label');
+function cellAt(px,py){
+  const r = canvas.getBoundingClientRect();
+  const u = (px-r.left)/r.width, v=(py-r.top)/r.height;
+  const col = Math.floor(u*COLS), row = Math.floor(v*ROWS);
+  if(col<0||col>=COLS||row<0||row>=ROWS) return -1;
+  const idx = row*COLS+col;
+  return idx<PROJECTS.length?idx:-1;
+}
+function updateLabel(px,py){
+  const idx = cellAt(px,py);
+  if(idx<0){ label.style.opacity=0; return; }
+  const p=PROJECTS[idx];
+  label.querySelector('.name').textContent=p.title;
+  label.querySelector('.client').textContent=p.client;
+  label.style.left=px+'px'; label.style.top=py+'px'; label.style.opacity=1;
+}
+canvas.addEventListener('pointerleave', ()=>label.style.opacity=0);
+canvas.addEventListener('click', e=>{
+  if(moved) return; // it was a drag, not a click
+  const idx=cellAt(e.clientX,e.clientY);
+  if(idx>=0) openSolo(idx);
+});
+
+// ── render loop ──
+const clock = new THREE.Clock();
+function tick(){
+  const dt=clock.getDelta();
+  uShared.time.value += dt;
+  // ambient breathing flow so it's never fully static, plus interaction
+  const ambient = 0.12 + 0.06*Math.sin(uShared.time.value*0.4);
+  targetFlow *= 0.96; // decay interaction
+  const want = Math.max(ambient, targetFlow);
+  curFlow += (want-curFlow)*0.06;
+  uShared.flow.value = curFlow;
+  renderer.render(scene,camera);
+  requestAnimationFrame(tick);
+}
+tick();
+
+// ─────────── SOLO PLAYER ───────────
+const solo=document.getElementById('solo'), soloFrame=document.getElementById('soloFrame');
+const soloTitle=document.getElementById('soloTitle'), soloClient=document.getElementById('soloClient'), soloTools=document.getElementById('soloTools');
+let soloIndex=0;
+function embedURL(v){
+  return v.type==='vimeo'
+    ? `https://player.vimeo.com/video/${v.id}?autoplay=1&title=0&byline=0&portrait=0`
+    : `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
+}
+function openSolo(i){
+  soloIndex=i; const p=PROJECTS[i];
+  soloFrame.src=embedURL(p.video);
+  soloTitle.textContent=p.title;
+  soloClient.textContent=p.client;
+  soloTools.innerHTML=p.tools.map(t=>`<span class="solo-tool">${t}</span>`).join('');
+  solo.classList.add('open'); document.body.style.overflow='hidden';
+}
+function closeSolo(){ solo.classList.remove('open'); soloFrame.src=''; document.body.style.overflow=''; }
+function step(d){ openSolo((soloIndex+d+PROJECTS.length)%PROJECTS.length); }
+document.getElementById('soloClose').onclick=closeSolo;
+document.getElementById('soloPrev').onclick=()=>step(-1);
+document.getElementById('soloNext').onclick=()=>step(1);
+solo.addEventListener('click',e=>{if(e.target===solo)closeSolo();});
+addEventListener('keydown',e=>{
+  if(!solo.classList.contains('open'))return;
+  if(e.key==='Escape')closeSolo();
+  if(e.key==='ArrowLeft')step(-1);
+  if(e.key==='ArrowRight')step(1);
+});
+</script>
 </body>
 </html>
