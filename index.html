@@ -229,11 +229,11 @@ import * as THREE from 'three';
 
 // ─────────── PROJECT DATA ───────────
 const PROJECTS = [
-  { title:"OpenAI x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279211"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d8b06c8a56d635166072_openaiclickup_2.png", tools:["After Effects","Figma"] },
-  { title:"Cursor x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279737"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d83d248cc8e4b0196da0_Cursorclickup_4.png", tools:["After Effects","Figma"] },
+  { title:"OpenAI x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279211",h:"506c85394f"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d8b06c8a56d635166072_openaiclickup_2.png", tools:["After Effects","Figma"] },
+  { title:"Cursor x ClickUp", client:"ClickUp", video:{type:"vimeo",id:"1211279737",h:"9f4d84c279"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6a62d83d248cc8e4b0196da0_Cursorclickup_4.png", tools:["After Effects","Figma"] },
   { title:"Color Blind", client:"Ked Danger", video:{type:"vimeo",id:"1157445016"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730c01afb3a2454afcce64_2.jpg", tools:["After Effects","Premiere Pro"] },
   { title:"Afraid Of The Apps", client:"ClickUp", video:{type:"youtube",id:"RR69tFQeSH0"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d07761b276eec019df7_6.jpeg", tools:["After Effects","Cinema 4D"] },
-  { title:"LevelUp", client:"ClickUp", video:{type:"vimeo",id:"1132656229"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d705fbcf52aafe8b61d_2.jpeg", tools:["After Effects","Cinema 4D"] },
+  { title:"LevelUp", client:"ClickUp", video:{type:"vimeo",id:"1132656229",h:"5834032804"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730d705fbcf52aafe8b61d_2.jpeg", tools:["After Effects","Cinema 4D"] },
   { title:"ClickUp 4.0 — Work Different", client:"ClickUp", video:{type:"youtube",id:"i5ChP35iJPw"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/6ad6f77d9b4e794b5e584613_Screenshot%202026-10-19%20at%2010.08.55%E2%80%AFPM.png", tools:["After Effects","Figma"] },
   { title:"Super Bowl LVI", client:"ClickUp", video:{type:"youtube",id:"AirnL1NxOAw"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730e5a70ee7f868747a408_7.jpeg", tools:["Figma","After Effects"] },
   { title:"ClickUp 4.0 — Launch", client:"ClickUp", video:{type:"youtube",id:"feAJjhF4_-M"}, poster:"https://cdn.prod.website-files.com/696c6ad5186a173d7112898c/69730eec5eaf32265a78d1eb_1.jpeg", tools:["After Effects","Figma"] },
@@ -403,7 +403,7 @@ const soloTitle=document.getElementById('soloTitle'), soloClient=document.getEle
 let soloIndex=0;
 function embedURL(v){
   return v.type==='vimeo'
-    ? `https://player.vimeo.com/video/${v.id}?autoplay=1&title=0&byline=0&portrait=0`
+    ? `https://player.vimeo.com/video/${v.id}?${v.h ? 'h='+v.h+'&' : ''}autoplay=1&title=0&byline=0&portrait=0`
     : `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
 }
 function openSolo(i){
