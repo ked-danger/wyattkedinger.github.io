@@ -16,6 +16,14 @@
 /* MotionIN's camera-tuning panel is a gallery tool, not part of the piece */
 .ah-settingsbtn, .ah-settings { display: none !important; }
 
+/* Membrane surface: full-bleed, under the grain, vignette and cards */
+.arthaus .ah-membrane { position: absolute; inset: 0; z-index: 0; display: block; pointer-events: none; }
+
+/* Rounded cards (circular corners on a 16:9 card: 2.2% of width = 3.9% of height) */
+.arthaus .artwork-card { border-radius: 2.2% / 3.9%; }
+/* Extrusion edges at 25% white */
+.arthaus .artwork-edge-t, .arthaus .artwork-edge-r { background: rgba(255, 255, 255, 0.25); }
+
 /* Video inside the focused card, fading in as the card arrives */
 .artwork-video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 2; pointer-events: auto; background: #000; opacity: 0; animation: artwork-video-in 0.5s ease 0.6s forwards; }
 @keyframes artwork-video-in { to { opacity: 1; } }
