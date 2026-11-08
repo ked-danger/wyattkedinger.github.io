@@ -1,8 +1,27 @@
-/* Fonts the Morph component expects (Next.js provided these as CSS variables) */
+/* Every font slot in the hero uses your site's Overused Grotesk (loaded by css/webflow.css) */
 :root {
-  --font-bebas: "Bebas Neue", sans-serif;
-  --font-space-grotesk: "Space Grotesk";
-  --font-geist-mono: "Geist Mono";
+  --font-bebas: Overusedgrotesk, Arial, sans-serif;
+  --font-space-grotesk: Overusedgrotesk, Arial, sans-serif;
+  --font-geist-mono: Overusedgrotesk, Arial, sans-serif;
+}
+
+/* "Wyatt K" set like your site's H1: semibold, sentence case, tight tracking */
+.arthaus .ah-title { text-transform: none; font-weight: 600; letter-spacing: -0.0464em; line-height: 1; }
+
+/* "/ Hi, I'm Wyatt Kedinger." set like your nav line */
+.arthaus .ah-logo.wk-hello { border: 0; padding: 0; border-radius: 0; font-size: 24px; font-weight: 700; line-height: 1.2; letter-spacing: -1px; text-transform: none; color: #fff; }
+.arthaus .wk-slash, .arthaus .wk-caret { color: #f24236; }
+
+/* the three résumé lines, set like your nav subheads; second and third lines dimmed (they are near-black on your light hero) */
+.arthaus .wk-resume { margin: 0; }
+.arthaus .wk-line { font-family: var(--grotesk); font-weight: 700; font-size: clamp(15px, 2vw, 30px); line-height: 1.2; letter-spacing: -1px; color: rgba(255, 255, 255, 0.42); white-space: nowrap; }
+.arthaus .wk-line-main { color: #fff; }
+.arthaus[data-open="false"] .ah-titleblock { max-width: min(54vw, 760px); }
+.arthaus[data-open="false"] .ah-titlemeta { max-width: min(54vw, 760px); }
+@media (max-width: 759px) {
+  .arthaus .ah-logo.wk-hello { font-size: 17px; }
+  .arthaus .wk-line { white-space: normal; font-size: 4.2vw; }
+  .arthaus[data-open="false"] .ah-titleblock, .arthaus[data-open="false"] .ah-titlemeta { max-width: 84vw; }
 }
 
 /* Hero stays pinned while page scroll moves through the 10 projects, then the page continues */
