@@ -2,10 +2,14 @@
 // The simulation and drawing below are the original code (see _source/membrane/membrane-chunk.js);
 // only the React wrapper is replaced, so it attaches to the hero's <canvas class="ah-membrane">.
 (function () {
-  // the original's dark palette (the hero is dark); highlighted dots tinted slightly yellow (was 255,252,245)
-  var P = { bg: "#08080a", lineAlpha: .018, edgeR: 130, edgeG: 130, edgeB: 140, centerR: 245, centerG: 235, centerB: 210, activeR: 255, activeG: 226, activeB: 130 };
-  // the cursor's effect on dot opacity, as a share of the original's (0.1 = 10%)
-  var REACT = 0.1;
+  // the original's dark palette (the hero is dark); highlighted dots go full yellow (was warm white 255,252,245)
+  var P = { bg: "#08080a", lineAlpha: .018, edgeR: 130, edgeG: 130, edgeB: 140, centerR: 245, centerG: 235, centerB: 210, activeR: 255, activeG: 220, activeB: 0 };
+  // the cursor's effect on dot opacity, as a share of the original's (1 = original)
+  var REACT = 1;
+  // how far the dots visibly move, as a share of the original (0.1 = 10%); brightness and colour still use the full reaction
+  var POS = 0.1;
+  function px(F) { return F.restX + (F.x - F.restX) * POS }
+  function py(F) { return F.restY + (F.y - F.restY) * POS - .3 * F.offsetZ * POS }
   // square grid: same spacing across and down (the original spread 50 x 30 points over the hero, so spacing differed)
   var SPACING = 29.4, ROWS = 30, COLS = 50;
 
@@ -45,18 +49,18 @@
         }
       })();
       var n = Math.sqrt(h * h + g * g), ax = u.x, iy = u.y, o = ax > 0 && iy > 0 && ax < v && iy < x, l = .35 * v, c = .35 * x, d = "rgba(" + r.centerR + "," + r.centerG + "," + r.centerB + "," + r.lineAlpha + ")";
-      for (var e4 = 0; e4 < ROWS; e4++) { s.beginPath(); for (var t4 = 0; t4 < COLS; t4++) { var r4 = y[e4][t4]; 0 === t4 ? s.moveTo(r4.x, r4.y - .3 * r4.offsetZ) : s.lineTo(r4.x, r4.y - .3 * r4.offsetZ) } s.strokeStyle = d, s.lineWidth = .5, s.stroke() }
-      for (var e5 = 0; e5 < COLS; e5++) { s.beginPath(); for (var t5 = 0; t5 < ROWS; t5++) { var r5 = y[t5][e5]; 0 === t5 ? s.moveTo(r5.x, r5.y - .3 * r5.offsetZ) : s.lineTo(r5.x, r5.y - .3 * r5.offsetZ) } s.strokeStyle = d, s.lineWidth = .5, s.stroke() }
+      for (var e4 = 0; e4 < ROWS; e4++) { s.beginPath(); for (var t4 = 0; t4 < COLS; t4++) { var r4 = y[e4][t4]; 0 === t4 ? s.moveTo(px(r4), py(r4)) : s.lineTo(px(r4), py(r4)) } s.strokeStyle = d, s.lineWidth = .5, s.stroke() }
+      for (var e5 = 0; e5 < COLS; e5++) { s.beginPath(); for (var t5 = 0; t5 < ROWS; t5++) { var r5 = y[t5][e5]; 0 === t5 ? s.moveTo(px(r5), py(r5)) : s.lineTo(px(r5), py(r5)) } s.strokeStyle = d, s.lineWidth = .5, s.stroke() }
       for (var e6 = 0; e6 < ROWS; e6++) for (var t6 = 0; t6 < COLS; t6++) {
-        var A, I, D, F = y[e6][t6], U = Math.abs(F.offsetZ), M = F.y - .3 * F.offsetZ, pp = F.restX - h, vv = F.restY - g,
+        var A, I, D, F = y[e6][t6], U = Math.abs(F.offsetZ), M = py(F), FX = px(F), pp = F.restX - h, vv = F.restY - g,
           X = Math.pow(1 - Math.min(1, Math.sqrt(pp * pp + vv * vv) / n * 1.4), 1.5),
           b0 = .06 + .18 * X, bR = U > .5 ? Math.min(.9, .05 * U) : 0,
           b = b0 + Math.max(0, bR - b0) * REACT, W = 1 + +X + (U > .5 ? .05 * U : 0);
         if (o) { var e7 = (F.restX - h) / l, t7 = (F.restY - g) / c, r7 = e7 * e7 + t7 * t7; r7 < 1 && (b *= 1 - (1 - r7) * .7) }
-        if (U > 3) { var k = Math.min(1, .08 * U); A = r.centerR + (r.activeR - r.centerR) * k, I = r.centerG + (r.activeG - r.centerG) * k, D = r.centerB + (r.activeB - r.centerB) * k }
+        if (U > 3) { var k = Math.min(1, .08 * U); A = r.centerR + (r.activeR - r.centerR) * k, I = r.centerG + (r.activeG - r.centerG) * k, D = r.centerB + (r.activeB - r.centerB) * k; b = Math.max(b, k) } // highlighted dots solid, so the yellow reads at full colour
         else A = r.edgeR + (r.centerR - r.edgeR) * X, I = r.edgeG + (r.centerG - r.edgeG) * X, D = r.edgeB + (r.centerB - r.edgeB) * X;
-        (U > 1.5 || X > .4) && (s.beginPath(), s.arc(F.x, M, W + 6, 0, 2 * Math.PI), s.fillStyle = "rgba(" + A + "," + I + "," + D + "," + Math.max(.03 * X, (U > .5 ? Math.min(.9, .05 * U) : 0) * .06 * REACT) * (o ? .3 : 1) + ")", s.fill());
-        s.beginPath(), s.arc(F.x, M, W, 0, 2 * Math.PI), s.fillStyle = "rgba(" + A + "," + I + "," + D + "," + b + ")", s.fill()
+        (U > 1.5 || X > .4) && (s.beginPath(), s.arc(FX, M, W + 6, 0, 2 * Math.PI), s.fillStyle = "rgba(" + A + "," + I + "," + D + "," + Math.max(.03 * X, (U > .5 ? Math.min(.9, .05 * U) : 0) * .06 * REACT) * (o ? .3 : 1) + ")", s.fill());
+        s.beginPath(), s.arc(FX, M, W, 0, 2 * Math.PI), s.fillStyle = "rgba(" + A + "," + I + "," + D + "," + b + ")", s.fill()
       }
       requestAnimationFrame(loop)
     });

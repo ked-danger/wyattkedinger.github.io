@@ -35,6 +35,15 @@
 /* MotionIN's camera-tuning panel is a gallery tool, not part of the piece */
 .ah-settingsbtn, .ah-settings { display: none !important; }
 
+/* Hero background: Rotunda's gradient (motionin.design/gallery/rotunda) — its glow layers over its navy-to-blue base */
+.arthaus.arthaus {
+  background:
+    radial-gradient(64% 50%, rgba(140, 170, 255, 0.06) 0%, rgba(140, 170, 255, 0) 60%),
+    radial-gradient(70% 70% at 30% 30%, rgba(120, 150, 230, 0.05) 0%, rgba(120, 150, 230, 0) 55%),
+    radial-gradient(80% 60% at 70% 75%, rgba(80, 110, 200, 0.043) 0%, rgba(80, 110, 200, 0) 60%),
+    linear-gradient(rgb(2, 4, 19) 0%, rgb(3, 6, 26) 53%, rgb(7, 16, 46) 67%, rgb(18, 36, 106) 82%, rgb(39, 69, 178) 93%, rgb(60, 102, 220) 100%) !important;
+}
+
 /* Membrane surface: full-bleed, under the grain, vignette and cards */
 .arthaus .ah-membrane { position: absolute; inset: 0; z-index: 0; display: block; pointer-events: none; }
 
